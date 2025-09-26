@@ -80,8 +80,6 @@ Official releases use code signing. If you're a maintainer:
 
 ## Project Structure
 
-See [CLAUDE.md](CLAUDE.md) for detailed architecture information.
-
 Key files:
 - `main.js` - Electron main process
 - `overlay/overlay.js` - All UI and note logic (8000+ lines)

@@ -48,8 +48,8 @@ desktop.ini
 *.sublime-project
 *.sublime-workspace
 
-# Claude related files (keep CLAUDE.md for development guidance)
-# CLAUDE.md is useful for contributors, so we include it
+# Claude related files
+CLAUDE.md
 .claude/
 claude-code/
 .claude-code/
