@@ -2,13 +2,13 @@
 
 A powerful, transparent overlay sticky notes application for Windows that lets you place notes, images, timers, and various widgets directly on your desktop. Perfect for quick notes, reminders, and staying organized while you work.
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/OwenModsTW/phasepad)
-![GitHub all releases](https://img.shields.io/github/downloads/OwenModsTW/phasepad/total)
-![GitHub repo size](https://img.shields.io/github/repo-size/OwenModsTW/phasepad)
-![GitHub last commit](https://img.shields.io/github/last-commit/OwenModsTW/phasepad)
-![GitHub issues](https://img.shields.io/github/issues/OwenModsTW/phasepad)
-![GitHub stars](https://img.shields.io/github/stars/OwenModsTW/phasepad?style=social)
-![License](https://img.shields.io/github/license/OwenModsTW/phasepad)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/OwenModsTW/phasepad?cache=refresh)
+![GitHub all releases](https://img.shields.io/github/downloads/OwenModsTW/phasepad/total?cache=refresh)
+![GitHub repo size](https://img.shields.io/github/repo-size/OwenModsTW/phasepad?cache=refresh)
+![GitHub last commit](https://img.shields.io/github/last-commit/OwenModsTW/phasepad?cache=refresh)
+![GitHub issues](https://img.shields.io/github/issues/OwenModsTW/phasepad?cache=refresh)
+![GitHub stars](https://img.shields.io/github/stars/OwenModsTW/phasepad?style=social&cache=refresh)
+![License](https://img.shields.io/github/license/OwenModsTW/phasepad?cache=refresh)
 
 ## Features
 
