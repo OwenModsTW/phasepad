@@ -1,0 +1,92 @@
+# Dependencies
+node_modules/
+
+# User data and configuration
+data/
+config.json
+*.json
+!package.json
+!package-lock.json
+
+# Build outputs
+dist/
+out/
+release/
+*.exe
+*.msi
+*.dmg
+*.deb
+*.rpm
+*.AppImage
+*.snap
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Claude related files (keep CLAUDE.md for development guidance)
+# CLAUDE.md is useful for contributors, so we include it
+.claude/
+claude-code/
+.claude-code/
+*.claude
+.cursorrules
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+tmp/
+temp/
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Documentation build outputs
+docs/_build/
+docs/.build/
+
+# Backup files
+*.bak
+*.backup
+*~
+*.old
+
+# Archive files (in case users store these locally)
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Personal notes (but not the app's notes)
+notes.txt
+TODO.txt
+todo.txt

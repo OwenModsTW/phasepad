@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PhasePad Document Editor</title>
+  <link rel="stylesheet" href="document-editor.css">
+</head>
+<body>
+  <div id="document-container">
+    <!-- Toolbar -->
+    <div id="toolbar">
+      <div class="toolbar-section">
+        <div class="logo-section">
+          <img src="../media/LogoWhite.png" alt="PhasePad" class="logo">
+          <span class="document-title-display" id="document-title-display">Untitled Document</span>
+        </div>
+      </div>
+      
+      <div class="toolbar-section">
+        <!-- File operations -->
+        <button class="toolbar-btn" id="new-btn" title="New Document">
+          <span class="btn-icon">📄</span>
+          New
+        </button>
+        <button class="toolbar-btn" id="open-btn" title="Open Document">
+          <span class="btn-icon">📁</span>
+          Open
+        </button>
+        <button class="toolbar-btn" id="save-btn" title="Save Document">
+          <span class="btn-icon">💾</span>
+          Save
+        </button>
+        <button class="toolbar-btn" id="export-btn" title="Export Document">
+          <span class="btn-icon">📤</span>
+          Export
+          <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="export-dropdown" id="export-dropdown">
+          <div class="export-option" data-format="pdf">Export as PDF</div>
+          <div class="export-option" data-format="docx">Export as Word Document</div>
+          <div class="export-option" data-format="html">Export as HTML</div>
+          <div class="export-option" data-format="txt">Export as Text</div>
+        </div>
+      </div>
+      
+      <div class="toolbar-section">
+        <!-- Format toolbar -->
+        <div class="format-group">
+          <select id="font-family" class="format-select">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Calibri, sans-serif">Calibri</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Helvetica, sans-serif">Helvetica</option>
+          </select>
+          <select id="font-size" class="format-select">
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11" selected>11</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="24">24</option>
+            <option value="28">28</option>
+            <option value="32">32</option>
+          </select>
+        </div>
+        
+        <div class="format-group">
+          <button class="format-btn" id="bold-btn" title="Bold">
+            <strong>B</strong>
+          </button>
+          <button class="format-btn" id="italic-btn" title="Italic">
+            <em>I</em>
+          </button>
+          <button class="format-btn" id="underline-btn" title="Underline">
+            <u>U</u>
+          </button>
+        </div>
+        
+        <div class="format-group">
+          <button class="format-btn" id="align-left-btn" title="Align Left">
+            <span class="btn-icon">⬅</span>
+          </button>
+          <button class="format-btn" id="align-center-btn" title="Center">
+            <span class="btn-icon">⬄</span>
+          </button>
+          <button class="format-btn" id="align-right-btn" title="Align Right">
+            <span class="btn-icon">➡</span>
+          </button>
+          <button class="format-btn" id="align-justify-btn" title="Justify">
+            <span class="btn-icon">⬌</span>
+          </button>
+        </div>
+        
+        <div class="format-group">
+          <button class="format-btn" id="bulleted-list-btn" title="Bulleted List">
+            <span class="btn-icon">•</span>
+          </button>
+          <button class="format-btn" id="numbered-list-btn" title="Numbered List">
+            <span class="btn-icon">1.</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="toolbar-section">
+        <!-- Page setup -->
+        <div class="page-info">
+          <span id="page-count">Page 1 of 1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Document editor -->
+    <div id="editor-container">
+      <div id="page-container">
+        <div class="page" id="page-1">
+          <div class="page-content" contenteditable="true" id="editor">
+            <p><br></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div id="status-bar">
+      <div class="status-section">
+        <span id="word-count">Words: 0</span>
+        <span id="char-count">Characters: 0</span>
+      </div>
+      <div class="status-section">
+        <span id="cursor-position">Line 1, Column 1</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="document-editor.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PhasePad Timer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .timer-widget {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .timer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 12px 12px 0 0;
+      cursor: move;
+      -webkit-app-region: drag;
+    }
+
+    .timer-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timer-actions {
+      display: flex;
+      gap: 8px;
+      -webkit-app-region: no-drag;
+    }
+
+    .timer-action-btn {
+      width: 20px;
+      height: 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background 0.2s;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .timer-action-btn:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .timer-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      gap: 12px;
+    }
+
+    .timer-time {
+      font-size: 42px;
+      font-weight: 300;
+      font-family: 'Courier New', monospace;
+      color: #333;
+      letter-spacing: 2px;
+    }
+
+    .timer-type {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .timer-control-btn {
+      padding: 6px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .timer-start {
+      background: #28a745;
+      color: white;
+    }
+
+    .timer-start:hover {
+      background: #218838;
+    }
+
+    .timer-pause {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .timer-pause:hover {
+      background: #e0a800;
+    }
+
+    .timer-progress-mini {
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .timer-progress-fill-mini {
+      height: 100%;
+      background: #4a90e2;
+      transition: width 1s linear;
+    }
+
+    .timer-widget.pomodoro {
+      border-color: #e74c3c;
+    }
+
+    .timer-widget.pomodoro .timer-header {
+      background: rgba(231, 76, 60, 0.1);
+    }
+
+    .timer-widget.pomodoro .timer-progress-fill-mini {
+      background: #e74c3c;
+    }
+
+    .timer-widget.short-break {
+      border-color: #27ae60;
+    }
+
+    .timer-widget.short-break .timer-header {
+      background: rgba(39, 174, 96, 0.1);
+    }
+
+    .timer-widget.short-break .timer-progress-fill-mini {
+      background: #27ae60;
+    }
+
+    .timer-widget.long-break {
+      border-color: #3498db;
+    }
+
+    .timer-widget.long-break .timer-header {
+      background: rgba(52, 152, 219, 0.1);
+    }
+
+    .timer-widget.long-break .timer-progress-fill-mini {
+      background: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <div class="timer-widget" id="timer-widget">
+    <div class="timer-header">
+      <div class="timer-title">
+        <span id="timer-icon">⏲️</span>
+        <span id="timer-title">Timer</span>
+      </div>
+      <div class="timer-actions">
+        <button class="timer-action-btn" onclick="returnToOverlay()">↩</button>
+        <button class="timer-action-btn" onclick="closeTimer()">×</button>
+      </div>
+    </div>
+    <div class="timer-body">
+      <div class="timer-time" id="timer-display">00:00</div>
+      <div class="timer-type" id="timer-type">Pomodoro</div>
+      <div class="timer-controls">
+        <button class="timer-control-btn timer-start" id="timer-btn" onclick="toggleTimer()">Start</button>
+      </div>
+      <div class="timer-progress-mini">
+        <div class="timer-progress-fill-mini" id="timer-progress" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    
+    let noteData = null;
+    let timerInterval = null;
+
+    ipcRenderer.on('timer-data', (event, data) => {
+      noteData = data;
+      updateDisplay();
+      
+      // Apply theme based on timer type
+      const widget = document.getElementById('timer-widget');
+      widget.className = 'timer-widget ' + data.timerType;
+      
+      // Update title
+      document.getElementById('timer-title').textContent = data.title || getTimerTitle(data.timerType);
+      document.getElementById('timer-type').textContent = getTimerTypeLabel(data.timerType);
+      
+      // Start timer if it was running
+      if (data.timerRunning) {
+        startTimer();
+      }
+    });
+
+    ipcRenderer.on('update-timer', (event, data) => {
+      if (noteData) {
+        Object.assign(noteData, data);
+        updateDisplay();
+        
+        if (data.timerRunning && !timerInterval) {
+          startTimer();
+        } else if (!data.timerRunning && timerInterval) {
+          stopTimer();
+        }
+      }
+    });
+
+    function getTimerTitle(type) {
+      switch (type) {
+        case 'pomodoro': return 'Pomodoro Timer';
+        case 'short-break': return 'Short Break';
+        case 'long-break': return 'Long Break';
+        case 'custom': return 'Custom Timer';
+        default: return 'Timer';
+      }
+    }
+
+    function getTimerTypeLabel(type) {
+      switch (type) {
+        case 'pomodoro': return '25 minutes focus session';
+        case 'short-break': return '5 minutes break';
+        case 'long-break': return '15 minutes break';
+        case 'custom': return `${Math.floor(noteData.timerDuration / 60)} minutes`;
+        default: return '';
+      }
+    }
+
+    function updateDisplay() {
+      if (!noteData) return;
+      
+      const minutes = Math.floor(noteData.timerRemaining / 60);
+      const seconds = noteData.timerRemaining % 60;
+      document.getElementById('timer-display').textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      
+      const progress = ((noteData.timerDuration - noteData.timerRemaining) / noteData.timerDuration) * 100;
+      document.getElementById('timer-progress').style.width = `${progress}%`;
+      
+      document.getElementById('timer-btn').textContent = noteData.timerRunning ? 'Pause' : 'Resume';
+      document.getElementById('timer-btn').className = 
+        `timer-control-btn ${noteData.timerRunning ? 'timer-pause' : 'timer-start'}`;
+    }
+
+    function toggleTimer() {
+      if (!noteData) return;
+      
+      // Send message back to main overlay to toggle timer
+      ipcRenderer.send('timer-widget-action', {
+        noteId: noteData.id,
+        action: 'toggle'
+      });
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      
+      timerInterval = setInterval(() => {
+        if (noteData.timerRemaining > 0) {
+          noteData.timerRemaining--;
+          updateDisplay();
+          
+          // Send update back to main overlay
+          ipcRenderer.send('timer-widget-update', {
+            noteId: noteData.id,
+            timerRemaining: noteData.timerRemaining
+          });
+          
+          if (noteData.timerRemaining <= 0) {
+            stopTimer();
+            // Timer completed
+            ipcRenderer.send('timer-widget-action', {
+              noteId: noteData.id,
+              action: 'complete'
+            });
+          }
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function returnToOverlay() {
+      ipcRenderer.send('timer-widget-action', {
+        noteId: noteData.id,
+        action: 'return'
+      });
+    }
+
+    function closeTimer() {
+      stopTimer();
+      window.close();
+    }
+  </script>
+</body>
+</html>

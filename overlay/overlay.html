@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PhasePad Overlay</title>
+  <link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+  <div id="overlay-container">
+    <div id="toolbar">
+      <div class="toolbar-logo">
+        <img src="../media/LogoWhite.png" alt="PhasePad" style="height: 24px; opacity: 0.8;">
+      </div>
+      <div class="workspace-switcher">
+        <button id="workspace-home" class="workspace-btn active" data-workspace="home">
+          <img src="../media/homeicon.png" class="workspace-icon-img" alt="Home">
+          Home
+        </button>
+        <button id="workspace-work" class="workspace-btn" data-workspace="work">
+          <img src="../media/work.png" class="workspace-icon-img" alt="Work">
+          Work
+        </button>
+      </div>
+      <div style="position: relative;">
+        <button id="new-note-btn" class="toolbar-btn">
+          <span class="btn-icon">+</span>
+          New Note
+          <span style="font-size: 12px; margin-left: 4px;">▼</span>
+        </button>
+        <div class="note-type-selector" id="note-type-selector">
+          <div class="note-type-option" data-type="text">
+            <img src="../media/textnote.png" class="note-type-option-icon" alt="Text Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Text Note</span>
+              <span class="note-type-option-desc">Regular sticky note</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="file">
+            <img src="../media/fileicon.png" class="note-type-option-icon" alt="File Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">File Note</span>
+              <span class="note-type-option-desc">Link to a file</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="image">
+            <img src="../media/imagenote.png" class="note-type-option-icon" alt="Image Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Image Note</span>
+              <span class="note-type-option-desc">Image or screenshot</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="paint">
+            <img src="../media/paintnote.png" class="note-type-option-icon" alt="Paint Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Paint Note</span>
+              <span class="note-type-option-desc">Draw and sketch</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="todo">
+            <img src="../media/todonote.png" class="note-type-option-icon" alt="Todo Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Todo Note</span>
+              <span class="note-type-option-desc">Checklist and tasks</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="reminder">
+            <img src="../media/remindernote.png" class="note-type-option-icon" alt="Reminder Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Reminder Note</span>
+              <span class="note-type-option-desc">Set timed reminders</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="web">
+            <img src="../media/webnote.png" class="note-type-option-icon" alt="Web Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Web Note</span>
+              <span class="note-type-option-desc">Save websites and URLs</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="table">
+            <img src="../media/tablenote.png" class="note-type-option-icon" alt="Table Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Table Note</span>
+              <span class="note-type-option-desc">Data tables and lists</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="location">
+            <img src="../media/locationnote.png" class="note-type-option-icon" alt="Location Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Location Note</span>
+              <span class="note-type-option-desc">Save addresses and places</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="calculator">
+            <img src="../media/calculatornote.png" class="note-type-option-icon" alt="Calculator Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Calculator Note</span>
+              <span class="note-type-option-desc">Basic math operations</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="timer">
+            <img src="../media/timernote.png" class="note-type-option-icon" alt="Timer Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Timer Note</span>
+              <span class="note-type-option-desc">Pomodoro and timers</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="folder">
+            <img src="../media/foldernote.png" class="note-type-option-icon" alt="Folder Note">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Folder Note</span>
+              <span class="note-type-option-desc">Organize notes in groups</span>
+            </div>
+          </div>
+          <div class="note-type-option" data-type="code">
+            <img src="../media/codenote.png" class="note-type-option-icon" alt="Code Snippet">
+            <div class="note-type-option-text">
+              <span class="note-type-option-title">Code Snippet</span>
+              <span class="note-type-option-desc">Code with syntax highlighting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <button id="new-document-btn" class="toolbar-btn">
+          <span class="btn-icon">📄</span>
+          New Document
+          <span style="font-size: 12px; margin-left: 4px;">▼</span>
+        </button>
+        <div class="document-type-selector" id="document-type-selector">
+          <div class="document-type-option" data-type="word">
+            <img src="../media/documenticon.png" class="document-type-option-icon" alt="Word Document">
+            <div class="document-type-option-text">
+              <span class="document-type-option-title">Word Document</span>
+              <span class="document-type-option-desc">Rich text document with A4 layout</span>
+            </div>
+          </div>
+          <div class="document-type-option" data-type="markdown">
+            <img src="../media/codenote.png" class="document-type-option-icon" alt="Markdown Editor">
+            <div class="document-type-option-text">
+              <span class="document-type-option-title">Markdown Editor</span>
+              <span class="document-type-option-desc">Live preview markdown editor</span>
+            </div>
+          </div>
+          <div class="document-type-option" data-type="spreadsheet">
+            <img src="../media/tablenote.png" class="document-type-option-icon" alt="Spreadsheet">
+            <div class="document-type-option-text">
+              <span class="document-type-option-title">Spreadsheet</span>
+              <span class="document-type-option-desc">Excel-like data tables</span>
+            </div>
+          </div>
+          <div class="document-type-option" data-type="meeting">
+            <img src="../media/textnote.png" class="document-type-option-icon" alt="Meeting Notes">
+            <div class="document-type-option-text">
+              <span class="document-type-option-title">Meeting Notes</span>
+              <span class="document-type-option-desc">Structured meeting template</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" 
+                 id="search-input" 
+                 class="search-input" 
+                 placeholder="Search notes..."
+                 autocomplete="off">
+          <button id="search-clear" class="search-clear" style="display: none;">×</button>
+          <button id="search-options" class="search-options" title="Search options">
+            <img src="../media/settingsicon.png" class="search-icon-img" alt="Options">
+          </button>
+        </div>
+        <div class="search-dropdown" id="search-dropdown">
+          <div class="search-option">
+            <label class="search-checkbox">
+              <input type="checkbox" id="search-archived">
+              <span class="checkmark"></span>
+              Search archived notes
+            </label>
+          </div>
+          <div class="search-option">
+            <label class="search-checkbox">
+              <input type="checkbox" id="search-content" checked>
+              <span class="checkmark"></span>
+              Search content
+            </label>
+          </div>
+          <div class="search-option">
+            <label class="search-checkbox">
+              <input type="checkbox" id="search-titles" checked>
+              <span class="checkmark"></span>
+              Search titles
+            </label>
+          </div>
+          <div class="search-option">
+            <label class="search-checkbox">
+              <input type="checkbox" id="search-tags" checked>
+              <span class="checkmark"></span>
+              Search tags
+            </label>
+          </div>
+        </div>
+        <div class="search-results" id="search-results"></div>
+      </div>
+      <div class="toolbar-spacer"></div>
+      <button id="archive-btn" class="toolbar-btn" title="Show archived notes">
+        <img src="../media/foldernote.png" class="btn-icon-img" alt="Archive">
+        Archive
+      </button>
+      <button id="saved-docs-btn" class="toolbar-btn" title="Show saved documents">
+        <img src="../media/documenticon.png" class="btn-icon-img" alt="Saved Documents">
+        Documents
+      </button>
+      <button id="settings-btn" class="toolbar-btn" title="Settings">
+        <img src="../media/settingsicon.png" class="btn-icon-img" alt="Settings">
+        Settings
+      </button>
+      <div class="opacity-control">
+        <div class="overlay-color-picker" id="overlay-color-picker" title="Change overlay color">
+          <div class="overlay-color-options" id="overlay-color-options">
+            <div class="overlay-color-option" style="background-color: #4a90e2;" data-color="#4a90e2" title="Blue (Default)"></div>
+            <div class="overlay-color-option" style="background-color: #000000;" data-color="#000000" title="Black"></div>
+            <div class="overlay-color-option" style="background-color: #2d3748;" data-color="#2d3748" title="Dark Gray"></div>
+            <div class="overlay-color-option" style="background-color: #4a5568;" data-color="#4a5568" title="Gray"></div>
+            <div class="overlay-color-option" style="background-color: #38a169;" data-color="#38a169" title="Green"></div>
+            <div class="overlay-color-option" style="background-color: #d69e2e;" data-color="#d69e2e" title="Yellow"></div>
+            <div class="overlay-color-option" style="background-color: #e53e3e;" data-color="#e53e3e" title="Red"></div>
+            <div class="overlay-color-option" style="background-color: #805ad5;" data-color="#805ad5" title="Purple"></div>
+          </div>
+        </div>
+        <input type="range" id="opacity-slider" class="opacity-slider" min="30" max="100" value="70">
+      </div>
+      <button id="minimize-btn" class="toolbar-btn">
+        <span class="btn-icon">—</span>
+        Hide
+      </button>
+    </div>
+    <div id="notes-container"></div>
+  </div>
+  <script src="overlay.js"></script>
+</body>
+</html>
