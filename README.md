@@ -4,7 +4,7 @@ A powerful, transparent overlay sticky notes application for Windows that lets y
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/OwenModsTW/phasepad?cache=refresh)
 ![GitHub all releases](https://img.shields.io/github/downloads/OwenModsTW/phasepad/total?cache=refresh)
-![GitHub repo size](https://img.shields.io/github/repo-size/OwenModsTW/phasepad?cache=refresh)
+![GitHub repo size](https://img.shields.io/github/repo-size/OwenModsTW/phasepad)
 ![GitHub last commit](https://img.shields.io/github/last-commit/OwenModsTW/phasepad?cache=refresh)
 ![GitHub issues](https://img.shields.io/github/issues/OwenModsTW/phasepad?cache=refresh)
 ![GitHub stars](https://img.shields.io/github/stars/OwenModsTW/phasepad?style=social&cache=refresh)
